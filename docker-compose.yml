@@ -16,9 +16,11 @@ services:
 
   certbot:
     image: certbot/certbot:latest
+    restart: unless-stopped
     volumes:
       - ./var/www/certbot/:/var/www/certbot/:rw 
       - ./etc/letsencrypt/:/etc/letsencrypt/:rw 
+      
 networks:
   proxynet:
     external: true
