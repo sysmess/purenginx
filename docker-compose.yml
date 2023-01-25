@@ -1,0 +1,24 @@
+version: '3'
+services:
+
+  purenginx:
+    image: nginx:latest
+    container_name: "purenginx"
+    restart: unless-stopped
+    ports:
+      - 3380:80
+      - 3443:443
+    networks:
+      - proxynet
+    volumes:
+      - ./etc/nginx/conf.d/:/etc/nginx/conf.d/:ro
+      - ./certbot/www:/var/www/certbot/:ro
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./var/www/certbot/:/var/www/certbot/:rw 
+      - ./etc/letsencrypt/:/etc/letsencrypt/:rw 
+#networks:
+  #purenginx:
+    #name: purenginx
