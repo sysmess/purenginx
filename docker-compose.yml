@@ -13,6 +13,7 @@ services:
       - NGINX_PORT=443
     networks:
       - proxynet
+      - purenginx
     volumes:
       - ./etc/nginx/conf.d/:/etc/nginx/conf.d/:ro
       - ./var/log/nginx/:/var/log/nginx/:ro
@@ -31,3 +32,4 @@ networks:
     external: true
   purenginx:
     name: purenginx
+    driver: bridge
