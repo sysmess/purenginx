@@ -19,6 +19,8 @@ services:
     volumes:
       - ./var/www/certbot/:/var/www/certbot/:rw 
       - ./etc/letsencrypt/:/etc/letsencrypt/:rw 
-#networks:
+networks:
+  proxynet:
+    external: true
   #purenginx:
     #name: purenginx
