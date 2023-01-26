@@ -13,17 +13,14 @@ services:
       #- ./www/:/var/www/:cached
       #- ./certbot/www:/var/www/certbot/:ro
     labels:
-      - traefik.docker.network=proxynet
-      # Declaring a middleware
-      - traefik.http.middlewares.https-redirect.redirectscheme.scheme=https
-      - traefik.http.middlewares.https-redirect.redirectscheme.permanent=true
       - traefik.enable=true
-      - traefik.http.routers.nginx.entrypoints=http,https
+      - traefik.http.routers.nginx.entrypoints=https
       - traefik.http.routers.nginx.rule=Host(`nginx.l00k.online`) 
       - traefik.http.routers.nginx.tls.certresolver=staging
-      - traefik.http.routers.nginx.middlewares=https-redirect
+      - traefik.http.routers.nginx.middlewares=to-https
       
-
+      - traefik.http.middlewares.to-https.redirectscheme.scheme=https
+      - traefik.docker.network=proxynet
       
 
   #certbot:
