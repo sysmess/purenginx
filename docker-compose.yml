@@ -13,15 +13,15 @@ services:
       #- ./www/:/var/www/:cached
       #- ./certbot/www:/var/www/certbot/:ro
     labels:
+      # Declaring a middleware
+      - traefik.http.middlewares.https-redirect.redirectscheme.scheme=https
       - traefik.enable=true
-      - traefik.http.routers.nginx.entrypoints=https
+      - traefik.http.routers.nginx.entrypoints=http,https
       - traefik.http.routers.nginx.rule=Host(`nginx.l00k.online`) 
-      - traefik.http.routers.nginx.tls=true  
       - traefik.http.routers.nginx.tls.certresolver=staging
       - traefik.http.routers.nginx.middlewares=https-redirect
 
-      # Declaring a middleware
-      - traefik.http.middlewares.https-redirect.redirectscheme.scheme=https
+      
 
   #certbot:
     #image: certbot/certbot:latest
