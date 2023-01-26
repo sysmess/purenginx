@@ -8,20 +8,19 @@ services:
     ports:
       - 3380:80
       - 3443:443
-    environment:
-      - NGINX_PORT=80
-      - NGINX_PORT=443
-    expose:
-      - 80
-      - 443
     networks:
       - proxynet
-      - purenginx
+      #- purenginx
     volumes:
       - ./etc/nginx/conf.d/:/etc/nginx/conf.d/:ro
       - ./var/log/nginx/:/var/log/nginx/:ro
       - ./www/:/var/www/:cached
       #- ./certbot/www:/var/www/certbot/:ro
+    labels:
+      - traefik.enable=true
+      # http
+      - traefik.http.routers.nginx-http.entrypoints=http  
+      - traefik.http.routers.nginx-http.rule=Host(`nginx.l00k.online`)    
 
   #certbot:
     #image: certbot/certbot:latest
@@ -33,6 +32,6 @@ services:
 networks:
   proxynet:
     external: true
-  purenginx:
-    name: purenginx
-    driver: bridge
+  #purenginx:
+    #name: purenginx
+    #driver: bridge
