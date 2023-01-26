@@ -15,7 +15,6 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.middlewares.to-https.redirectscheme.scheme=https
-      - traefik.docker.network=proxynet      
       # http
       - traefik.http.routers.nginx-http.entrypoints=http
       - traefik.http.routers.nginx-http.rule=Host(`nginx.l00k.online`) 
