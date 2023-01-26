@@ -5,20 +5,15 @@ services:
     image: nginx:latest
     container_name: "purenginx"
     restart: unless-stopped
-    ports:
-      - 3380:80
-      - 3443:443
     networks:
       - proxynet
-      #- purenginx
-    volumes:
-      - ./etc/nginx/conf.d/:/etc/nginx/conf.d/:ro
-      - ./var/log/nginx/:/var/log/nginx/:ro
-      - ./www/:/var/www/:cached
+    #volumes:
+      #- ./etc/nginx/conf.d/:/etc/nginx/conf.d/:ro
+      #- ./var/log/nginx/:/var/log/nginx/:ro
+      #- ./www/:/var/www/:cached
       #- ./certbot/www:/var/www/certbot/:ro
     labels:
       - traefik.enable=true
-      # http
       - traefik.http.routers.nginx-http.entrypoints=http  
       - traefik.http.routers.nginx-http.rule=Host(`nginx.l00k.online`)    
 
