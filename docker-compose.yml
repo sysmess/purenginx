@@ -14,10 +14,13 @@ services:
       #- ./certbot/www:/var/www/certbot/:ro
     labels:
       - traefik.enable=true
-      - traefik.http.routers.nginx.entrypoints=https
-      - traefik.http.routers.nginx.rule=Host(`nginx.l00k.online`) 
-      - traefik.http.routers.nginx.tls.certresolver=staging
-      - traefik.http.routers.nginx.middlewares=to-https
+      - traefik.http.routers.nginx-http.entrypoints=http
+      - traefik.http.routers.nginx-http.rule=Host(`nginx.l00k.online`) 
+      - traefik.http.routers.nginx-http.middlewares=to-https
+      
+      - traefik.http.routers.nginx-https.entrypoints=https
+      - traefik.http.routers.nginx-https.rule=Host(`nginx.l00k.online`)
+      - traefik.http.routers.nginx-https.tls.certresolver=staging
       
       - traefik.http.middlewares.to-https.redirectscheme.scheme=https
       - traefik.docker.network=proxynet
