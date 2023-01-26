@@ -14,7 +14,7 @@ services:
       #- ./certbot/www:/var/www/certbot/:ro
     labels:
       - traefik.enable=true
-      - traefik.http.routers.nginx.entrypoints=http,httpss
+      - traefik.http.routers.nginx.entrypoints=http,https
       - traefik.http.routers.nginx.rule=Host(`nginx.l00k.online`) 
       - traefik.http.routers.nginx.tls=true  
       - traefik.http.routers.nginx.tls.certresolver=staging   
