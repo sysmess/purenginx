@@ -15,11 +15,13 @@ services:
     labels:
       # Declaring a middleware
       - traefik.http.middlewares.https-redirect.redirectscheme.scheme=https
+      - traefik.http.middlewares.https-redirect.redirectscheme.permanent=true
       - traefik.enable=true
       - traefik.http.routers.nginx.entrypoints=http,https
       - traefik.http.routers.nginx.rule=Host(`nginx.l00k.online`) 
       - traefik.http.routers.nginx.tls.certresolver=staging
       - traefik.http.routers.nginx.middlewares=https-redirect
+      
 
       
 
