@@ -13,6 +13,7 @@ services:
       #- ./www/:/var/www/:cached
       #- ./certbot/www:/var/www/certbot/:ro
     labels:
+      - traefik.docker.network=proxynet
       # Declaring a middleware
       - traefik.http.middlewares.https-redirect.redirectscheme.scheme=https
       - traefik.http.middlewares.https-redirect.redirectscheme.permanent=true
